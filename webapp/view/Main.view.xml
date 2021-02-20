@@ -45,7 +45,7 @@
 								formatOptions: {showMeasure: false}
 							}"
 							unit="ZAR" />
-    <Button xmlns="sap.m" text="Widthdraw" id="button0" icon="sap-icon://batch-payments" press="onWithdrawalButton"/>
+    <Button xmlns="sap.m" enabled="{limit_reached}" text="Widthdraw" id="button0" icon="sap-icon://batch-payments" press="onWithdrawalButton"/>
          </cells>
     </ColumnListItem>
 </items>
