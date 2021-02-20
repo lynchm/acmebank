@@ -15,13 +15,13 @@ sap.ui.define([
 		var sServiceUrl = "http://localhost:8080/api/accounts";
 		return Controller.extend("acmebank.controller.Main", {
 			onInit: function () {
+				var oModel = new sap.ui.model.json.JSONModel();
 				var that = this;
-				var post = $.ajax({
+				$.ajax({
 					url : sServiceUrl,
-					type : "GET"
-				});
-				post.done(function(data) {
-					var oModel = new sap.ui.model.json.JSONModel();
+					type : "GET",
+					async: false,
+			  success: function(data, textStatus, jqXHR) {
 					var balances = [];
 					console.log(data); 
 					oModel.setData(data);
@@ -30,9 +30,13 @@ sap.ui.define([
 					   balances.push(account_item.balance);
 					});
 					that.calculateBalance(balances);
-			})
+			     },fail: function(jqXHR, textStatus, error){
+					console.log(jqXHR.responseText);
+				 }
+				})
+		
 			},
-
+			
 			//function for calculating total account balance 
 			calculateBalance: function(params) {
 				var that = this;
@@ -45,7 +49,6 @@ sap.ui.define([
 			onWithdrawalButton: function(params) {
 				alert("Success");
 				var oButton = params.getSource();
-				console.log(oButton);
 				oButton.setEnabled(false);
 			}
 		});

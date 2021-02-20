@@ -13,13 +13,6 @@
     "ach": "ach"
   },
   "dataSources": {
-    "mainService": {
-      "uri": "http://localhost:8080/api/accounts",
-      "type": "OData",
-      "settings": {
-        "odataVersion": "2.0"
-      }
-    }
   },
   "sap.ui": {
     "technology": "UI5",
