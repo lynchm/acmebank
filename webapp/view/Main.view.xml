@@ -3,12 +3,91 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
->
+	xmlns:f="sap.f"
+	xmlns:t="sap.ui.table"
+><f:ShellBar
+			title="Acme Bank"
+			homeIcon="./resources/sap/ui/documentation/sdk/images/logo_ui5.png"
+			>
+			</f:ShellBar>
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
-					<content />
+				<Page id="page">
+					<content>
+					
+					<Table
+					items="{
+			path: '/',
+			sorter: {
+				path: 'balance'
+			}
+		}"
+				paste="onPaste"
+				id="accountsTable"
+				ariaLabelledBy="title">
+				<headerToolbar>
+          <Toolbar>
+            <Title level="H2" text="Account List" />
+            <ToolbarSpacer/>
+            <Button press="onTableSettings" icon="sap-icon://drop-down-list" tooltip="Settings"/>
+          </Toolbar>
+        </headerToolbar>
+				<items>
+        <ColumnListItem type="Active" id="item0">
+    <cells>
+    <Text text="{account_number}" id="text0"/>
+    <Text text="{account_type}" id="text1"/>
+    	<ObjectNumber
+							number="{
+								parts:[{path:'balance'},{path:'CurrencyCode'}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {showMeasure: false}
+							}"
+							unit="ZAR" />
+    <Button xmlns="sap.m" text="Widthdraw" id="button0" icon="sap-icon://batch-payments" press="onWithdrawalButton"/>
+         </cells>
+    </ColumnListItem>
+</items>
+				<columns>
+					<Column width="11rem">
+						<Label text="Account Number" />
+						
+					</Column>
+					<Column width="11rem">
+						<Label text="Account Type" />
+						
+					</Column>
+					<Column width="6rem" hAlign="End">
+						<Label text="Balance" />
+						
+					</Column>
+					<Column width="6rem" hAlign="End">
+						
+						
+					</Column>
+				</columns>
+			</Table>
+			<Toolbar>
+			<content>
+				<Title text="Balance" class="sapMObjectNumberLarge"/>
+				<ToolbarSpacer/>
+				<HBox>
+				<items>
+                            
+							<ObjectNumber id="balancetotal"
+							class="sapMObjectNumberLarge"
+							number="{
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {showMeasure: false}
+							}"
+							unit="ZAR" />
+                            <Text text='' width="12rem" />
+                            </items>
+                            </HBox>
+							</content>
+			</Toolbar>
+					</content>
 				</Page>
 			</pages>
 		</App>
